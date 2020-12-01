@@ -4,6 +4,7 @@ import com.findork.chiriezerie.exception.AppException;
 import com.findork.chiriezerie.security.constants.AuthConstants;
 import com.findork.chiriezerie.security.constants.ErrorCodes;
 import com.findork.chiriezerie.security.payload.LoginRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -41,7 +42,7 @@ public class RequestHandler {
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
         }
-        throw new AppException("Jwt is empty or Bearer missing", ErrorCodes.UNNAUTHORIZED.toString());
+        throw new AppException("Jwt is empty or Bearer missing",HttpStatus.UNAUTHORIZED);
     }
 
     /**
@@ -53,6 +54,6 @@ public class RequestHandler {
         if (StringUtils.hasText(request) && request.startsWith("Bearer ")) {
             return request.substring(7);
         }
-        throw new AppException("Jwt is empty or Bearer missing", ErrorCodes.UNNAUTHORIZED.toString());
+        throw new AppException("Jwt is empty or Bearer missing", HttpStatus.UNAUTHORIZED);
     }
 }

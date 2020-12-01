@@ -1,8 +1,11 @@
 package com.findork.chiriezerie.model;
 
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,7 +14,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "apartment")
 public class Apartment {
@@ -28,7 +31,7 @@ public class Apartment {
     private String address;
 
     @OneToOne()
-    @JoinColumn(name = "ingredient_id", referencedColumnName = "id")
+    @JoinColumn(name = "landLord_id", referencedColumnName = "id")
     private Landlord owner;
 
     @Column(name="city")
@@ -37,9 +40,28 @@ public class Apartment {
     @Column(name="details")
     private String details;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
-    @JoinColumn(name = "apartment_id")
+    //json list of base64 pictures
+    @Column(name="pictures")
+    private String pictures;
+
+    @Transient
+    @JsonIgnore
     private List<Picture> pictureList;
 
+    public void setPictures(String pictures) {
+        this.pictures = pictures;
+        Gson gson = new Gson();
+        System.out.println(pictures);
+        System.out.println(pictures);
+        pictureList = gson.fromJson(pictures,  new TypeToken<List<String>>(){}.getType());
+    }
+
+    public List<Picture> getPictureList() {
+        if(pictureList ==null){
+            Gson gson = new Gson();
+            pictureList = gson.fromJson(pictures,  new TypeToken<List<String>>(){}.getType());
+        }
+        return pictureList;
+    }
 
 }
