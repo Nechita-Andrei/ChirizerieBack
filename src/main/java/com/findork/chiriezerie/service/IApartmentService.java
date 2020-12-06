@@ -1,6 +1,7 @@
 package com.findork.chiriezerie.service;
 
 import com.findork.chiriezerie.model.Apartment;
+import com.findork.chiriezerie.model.daos.ApartmentDao;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,6 @@ public interface IApartmentService {
 
     Apartment deleteById(Integer id);
 
-    Apartment saveOrUpdate(Apartment apartment);
+    Apartment saveOrUpdate(ApartmentDao apartmentDao);
 
 }

@@ -1,8 +1,11 @@
 package com.findork.chiriezerie.service.implementation;
 
 import com.findork.chiriezerie.model.Apartment;
+import com.findork.chiriezerie.model.daos.ApartmentDao;
 import com.findork.chiriezerie.repository.ApartmentRepository;
+import com.findork.chiriezerie.repository.LandLordRepository;
 import com.findork.chiriezerie.service.IApartmentService;
+import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +15,9 @@ import java.util.List;
 @AllArgsConstructor
 public class ApartmentService implements IApartmentService {
 
+    private final Gson gson;
     private final ApartmentRepository apartmentRepository;
+    private final LandLordRepository landLordRepository;
 
     @Override
     public List<Apartment> getAll() {
@@ -32,7 +37,11 @@ public class ApartmentService implements IApartmentService {
     }
 
     @Override
-    public Apartment saveOrUpdate(Apartment apartment) {
+    public Apartment saveOrUpdate(ApartmentDao apartmentDao) {
+
+        Apartment apartment = new Apartment(apartmentDao);
+        apartment.setPictures(gson.toJson(apartmentDao.getPictureList()));
+        apartment.setOwner(landLordRepository.getOne(apartmentDao.getOwnerId()));
         return apartmentRepository.save(apartment);
     }
 }
