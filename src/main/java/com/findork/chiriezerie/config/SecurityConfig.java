@@ -69,12 +69,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/auth/signup").permitAll()
-                .antMatchers("/api/apartments","/api/auth/signin", "/api/auth/signup", "/api/stock/**").permitAll();
-//                .anyRequest().authenticated()
-//                .and()
-//                .exceptionHandling()
-//                .accessDeniedHandler(jwtAccessDeniedHandler)
-//                .authenticationEntryPoint(unauthorizedHandler);
+                .antMatchers("/api/auth/signin", "/api/auth/signup", "/api/stock/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .exceptionHandling()
+                .accessDeniedHandler(jwtAccessDeniedHandler)
+                .authenticationEntryPoint(unauthorizedHandler);
 
         // Add our custom JWT security filter
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
