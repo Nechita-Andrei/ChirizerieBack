@@ -19,7 +19,7 @@ public class ApartmentController {
 
     private final IApartmentService apartmentService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<ApartmentDao> getAll() {
         return apartmentService.getAll().stream().map(ApartmentDao::new).collect(Collectors.toList());
     }
@@ -42,7 +42,7 @@ public class ApartmentController {
         return new ApartmentDao(apartment);
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     public ApartmentDao save(@RequestBody ApartmentDao apartmentDao) {
         if (apartmentDao.getId() == null) {
             apartmentDao.setId(0);
