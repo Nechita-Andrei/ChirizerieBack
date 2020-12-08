@@ -46,6 +46,7 @@ public class ApartmentController {
     public ApartmentDao save(@RequestBody ApartmentDao apartmentDao) {
         if (apartmentDao.getId() == null) {
             apartmentDao.setId(0);
+            apartmentDao.setOwnerId(1);
         }
         return new ApartmentDao(apartmentService.saveOrUpdate(apartmentDao));
     }

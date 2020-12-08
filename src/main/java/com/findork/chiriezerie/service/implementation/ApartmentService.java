@@ -39,6 +39,7 @@ public class ApartmentService implements IApartmentService {
     @Override
     public Apartment saveOrUpdate(ApartmentDao apartmentDao) {
 
+        System.out.println(apartmentDao.toString());
         Apartment apartment = new Apartment(apartmentDao);
         apartment.setPictures(gson.toJson(apartmentDao.getPictureList()));
         apartment.setOwner(landLordRepository.getOne(apartmentDao.getOwnerId()));

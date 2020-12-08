@@ -59,7 +59,7 @@ public class ExceptionHandling {
     }
 
     @ExceptionHandler(AppException.class)
-    public ResponseEntity<HttpResponse> handleException(AppException exception) {
+    public ResponseEntity<HttpResponse> appExceptionHandler(AppException exception) {
         log.error(exception.getMessage());
         return httpResponseUtil.createHttpResponse(exception.getHttpStatus(), exception.getMessage());
     }
