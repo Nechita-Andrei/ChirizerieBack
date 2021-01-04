@@ -1,17 +1,16 @@
 package com.findork.chiriezerie.model;
 
-
-import lombok.AllArgsConstructor;
+import com.findork.chiriezerie.model.daos.ApartmentDao;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 
 @Getter
 @Setter
-@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "apartment")
 public class Apartment {
@@ -21,25 +20,33 @@ public class Apartment {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name="squarefeet")
+    @Column(name = "squarefeet")
     private Integer squareFeet;
 
-    @Column(name="address")
+    @Column(name = "address")
     private String address;
 
     @OneToOne()
-    @JoinColumn(name = "ingredient_id", referencedColumnName = "id")
+    @JoinColumn(name = "landLord_id", referencedColumnName = "id")
     private Landlord owner;
 
-    @Column(name="city")
+    @Column(name = "city")
     private String city;
 
-    @Column(name="details")
+    @Column(name = "details")
     private String details;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
-    @JoinColumn(name = "apartment_id")
-    private List<Picture> pictureList;
+    //json list of base64 pictures
+    @Column(name = "pictures")
+    private String pictures;
 
+
+    public Apartment(ApartmentDao apartmentDao) {
+        this.id = apartmentDao.getId();
+        this.squareFeet = apartmentDao.getSquareFeet();
+        this.address = apartmentDao.getAddress();
+        this.city = apartmentDao.getCity();
+        this.details = apartmentDao.getDetails();
+    }
 
 }
