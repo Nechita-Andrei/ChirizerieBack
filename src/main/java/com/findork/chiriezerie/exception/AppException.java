@@ -1,11 +1,13 @@
 package com.findork.chiriezerie.exception;
 
+import org.springframework.http.HttpStatus;
+
 public class AppException extends RuntimeException {
 
     private final String message;
-    private final String httpStatus;
+    private final HttpStatus httpStatus;
 
-    public AppException(String message, String httpStatus) {
+    public AppException(String message, HttpStatus httpStatus) {
         this.message = message;
         this.httpStatus = httpStatus;
     }
@@ -15,7 +17,7 @@ public class AppException extends RuntimeException {
         return message;
     }
 
-    public String getHttpStatus() {
+    public HttpStatus getHttpStatus() {
         return httpStatus;
     }
 }
