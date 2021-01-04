@@ -12,9 +12,9 @@ public interface IApartmentService {
 
     List<Apartment> getAll();
 
-    Apartment getById(Integer id);
+    Apartment getById(Long id);
 
-    Apartment deleteById(Integer id);
+    Apartment deleteById(Long id);
 
     Apartment saveOrUpdate(ApartmentDao apartmentDao, User user);
 

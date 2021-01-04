@@ -26,7 +26,7 @@ public class ApartmentController {
     }
 
     @GetMapping("/{id}")
-    public ApartmentDao getOne(@PathVariable Integer id) {
+    public ApartmentDao getOne(@PathVariable Long id) {
         Apartment apartment = apartmentService.getById(id);
         if (apartment == null) {
             throw new AppException("Apartment not found", HttpStatus.NOT_FOUND);
@@ -35,7 +35,7 @@ public class ApartmentController {
     }
 
     @DeleteMapping("/{id}")
-    public ApartmentDao delete(@PathVariable Integer id) {
+    public ApartmentDao delete(@PathVariable Long id) {
         Apartment apartment = apartmentService.deleteById(id);
         if (apartment == null) {
             throw new AppException("Apartment not found", HttpStatus.NOT_FOUND);

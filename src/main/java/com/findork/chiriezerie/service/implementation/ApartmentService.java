@@ -26,12 +26,12 @@ public class ApartmentService implements IApartmentService {
     }
 
     @Override
-    public Apartment getById(Integer id) {
+    public Apartment getById(Long id) {
         return apartmentRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Apartment deleteById(Integer id) {
+    public Apartment deleteById(Long id) {
         Apartment apartment = apartmentRepository.findById(id).orElse(null);
         apartmentRepository.deleteById(id);
         return apartment;
