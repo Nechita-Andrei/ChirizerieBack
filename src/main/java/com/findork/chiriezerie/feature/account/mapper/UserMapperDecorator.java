@@ -13,18 +13,19 @@ public abstract class UserMapperDecorator implements UserMapper {
 
     @Autowired
     private UserMapper userMapper;
+    
     @Autowired
     private PasswordEncoder passwordEncoder;
+    
     @Autowired
     private RoleService roleService;
-
 
     @Override
     public User signUpRequestToUser(SignUpRequest signUpRequest) {
         User user = userMapper.signUpRequestToUser(signUpRequest);
         user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
         user.setAccountStatus(AccountStatus.ACTIVE);
-        user.setRoles(Collections.singleton(roleService.getUserRole()));
+        user.setRoles(Collections.singleton(roleService.getUserRole(signUpRequest.getRoleName())));
         return user;
     }
 }

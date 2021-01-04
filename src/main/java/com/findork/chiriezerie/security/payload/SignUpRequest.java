@@ -1,5 +1,6 @@
 package com.findork.chiriezerie.security.payload;
 
+import com.findork.chiriezerie.feature.account.role.RoleName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,4 +31,6 @@ public class SignUpRequest {
     @NotBlank
     @Size(min = 6, max = 20)
     private String password;
+    
+    private RoleName roleName;
 }

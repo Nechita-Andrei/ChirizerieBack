@@ -4,6 +4,7 @@ CREATE TABLE `users` (
   `username` varchar(15) NOT NULL,
   `email` varchar(40) NOT NULL,
   `password` varchar(100) NOT NULL,
+  `phone_number` varchar(100) NOT NULL,
   `account_status` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_users_username` (`username`),

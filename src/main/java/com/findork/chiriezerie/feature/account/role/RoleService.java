@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 public class RoleService {
     private final RoleRepository roleRepository;
 
-    public Role getUserRole() {
-        return roleRepository.findByName(RoleName.ROLE_USER);
+    public Role getUserRole(RoleName roleName) {
+        return roleRepository.findByName(roleName);
     }
 
     public Role getAdminRole() {

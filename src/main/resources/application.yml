@@ -8,7 +8,7 @@ spring:
     url: jdbc:mysql://localhost:3306/chiriezerie?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=utf-8
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: password
+    password: sqlpassword
     hikari:
       connection-timeout: 600000
 
@@ -38,8 +38,8 @@ spring:
 
 jwt:
   issuer: auth
-  access-expiration-in-ms: 180000
-  refresh-expiration-in-ms: 3600000
+  access-expiration-in-ms: 18000000
+  refresh-expiration-in-ms: 360000000
   alias: prgxKey
   certificate: prgxKey.jks
   store-password: prgxpass

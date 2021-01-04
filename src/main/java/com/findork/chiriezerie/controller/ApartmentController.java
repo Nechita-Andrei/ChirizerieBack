@@ -1,6 +1,7 @@
 package com.findork.chiriezerie.controller;
 
 import com.findork.chiriezerie.exception.AppException;
+import com.findork.chiriezerie.feature.account.User;
 import com.findork.chiriezerie.model.Apartment;
 import com.findork.chiriezerie.model.daos.ApartmentDao;
 import com.findork.chiriezerie.service.IApartmentService;
@@ -43,12 +44,7 @@ public class ApartmentController {
     }
 
     @PostMapping("")
-    public ApartmentDao save(@RequestBody ApartmentDao apartmentDao) {
-        if (apartmentDao.getId() == null) {
-            apartmentDao.setId(0);
-            apartmentDao.setOwnerId(1);
-        }
-        return new ApartmentDao(apartmentService.saveOrUpdate(apartmentDao));
+    public ApartmentDao save(@RequestBody ApartmentDao apartmentDao, User user) {
+        return new ApartmentDao(apartmentService.saveOrUpdate(apartmentDao, user));
     }
-
 }

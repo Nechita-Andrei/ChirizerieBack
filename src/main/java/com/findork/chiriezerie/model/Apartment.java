@@ -1,12 +1,12 @@
 package com.findork.chiriezerie.model;
 
+import com.findork.chiriezerie.feature.account.User;
 import com.findork.chiriezerie.model.daos.ApartmentDao;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-
 
 @Getter
 @Setter
@@ -17,8 +17,7 @@ public class Apartment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "squarefeet")
     private Integer squareFeet;
@@ -26,9 +25,9 @@ public class Apartment {
     @Column(name = "address")
     private String address;
 
-    @OneToOne()
-    @JoinColumn(name = "landLord_id", referencedColumnName = "id")
-    private Landlord owner;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(name = "city")
     private String city;
@@ -39,7 +38,9 @@ public class Apartment {
     //json list of base64 pictures
     @Column(name = "pictures")
     private String pictures;
-
+    
+    @Column(name = "price")
+    private Double price;
 
     public Apartment(ApartmentDao apartmentDao) {
         this.id = apartmentDao.getId();
@@ -48,5 +49,4 @@ public class Apartment {
         this.city = apartmentDao.getCity();
         this.details = apartmentDao.getDetails();
     }
-
 }

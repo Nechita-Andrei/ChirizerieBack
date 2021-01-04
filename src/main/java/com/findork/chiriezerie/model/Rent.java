@@ -28,6 +28,4 @@ public class Rent {
 
     @Column(name="number_of_rented_months")
     private Integer numberOfRentedMonths;
-
-
 }

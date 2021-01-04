@@ -1,6 +1,7 @@
 package com.findork.chiriezerie.feature.account;
 
 import com.findork.chiriezerie.feature.account.role.Role;
+import com.findork.chiriezerie.model.Apartment;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -24,7 +26,8 @@ import java.util.Set;
         @UniqueConstraint(columnNames = {"username"}),
         @UniqueConstraint(columnNames = {"email"})}
 )
-public class User{
+public class User {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -42,6 +45,10 @@ public class User{
     @Size(max = 40)
     @Email
     private String email;
+    
+//    @NotBlank
+    @Size(max = 10)
+    private String phoneNumber;
 
     @NotBlank
     @Size(max = 100)
@@ -57,6 +64,9 @@ public class User{
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Apartment> apartment;
+    
     public boolean isActive() {
         return accountStatus.isActive();
     }

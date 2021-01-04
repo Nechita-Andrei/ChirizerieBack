@@ -16,10 +16,10 @@ import java.util.List;
 @ToString
 public class ApartmentDao {
 
-    private Integer id;
+    private Long id;
     private Integer squareFeet;
     private String address;
-    private Integer ownerId;
+    private Long userId;
     private String city;
     private String details;
     private List<String> pictureList;
@@ -29,7 +29,7 @@ public class ApartmentDao {
         this.id = apartment.getId();
         this.squareFeet = apartment.getSquareFeet();
         this.address = apartment.getAddress();
-        this.ownerId = apartment.getOwner().getId();
+        this.userId = apartment.getUser().getId();
         this.city = apartment.getCity();
         this.details = apartment.getDetails();
         Gson gson = new Gson();
