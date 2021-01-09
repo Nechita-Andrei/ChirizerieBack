@@ -41,6 +41,9 @@ public class Apartment {
     
     @Column(name = "price")
     private Double price;
+    
+    @Column(name = "rooms")
+    private Integer rooms;
 
     public Apartment(ApartmentDao apartmentDao) {
         this.id = apartmentDao.getId();
@@ -48,5 +51,7 @@ public class Apartment {
         this.address = apartmentDao.getAddress();
         this.city = apartmentDao.getCity();
         this.details = apartmentDao.getDetails();
+        this.price = apartmentDao.getPrice();
+        this.rooms = apartmentDao.getRooms();
     }
 }

@@ -53,6 +53,9 @@ public class User {
     @NotBlank
     @Size(max = 100)
     private String password;
+    
+    @Column(name = "profile_picture")
+    private String profilePicture;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "account_status")

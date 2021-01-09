@@ -22,6 +22,8 @@ public class ApartmentDao {
     private Long userId;
     private String city;
     private String details;
+    private Double price;
+    private Integer rooms;
     private List<String> pictureList;
 
 
@@ -32,6 +34,8 @@ public class ApartmentDao {
         this.userId = apartment.getUser().getId();
         this.city = apartment.getCity();
         this.details = apartment.getDetails();
+        this.rooms = apartment.getRooms();
+        this.price = apartment.getPrice();
         Gson gson = new Gson();
         pictureList = gson.fromJson(apartment.getPictures(), new TypeToken<List<String>>() {}.getType());
     }

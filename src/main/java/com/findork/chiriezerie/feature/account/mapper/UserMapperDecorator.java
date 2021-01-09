@@ -24,6 +24,7 @@ public abstract class UserMapperDecorator implements UserMapper {
     public User signUpRequestToUser(SignUpRequest signUpRequest) {
         User user = userMapper.signUpRequestToUser(signUpRequest);
         user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
+        user.setPhoneNumber(signUpRequest.getPhone());
         user.setAccountStatus(AccountStatus.ACTIVE);
         user.setRoles(Collections.singleton(roleService.getUserRole(signUpRequest.getRoleName())));
         return user;
