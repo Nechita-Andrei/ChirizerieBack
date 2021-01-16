@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService {
     public UserDao updateProfilePicture(UserDao userDao) {
         User user = userRepository.findById(userDao.getId()).get();
         user.setProfilePicture(userDao.getProfilePicture());
+        userRepository.save(user);
         return new UserDao(user);
     }
 }
