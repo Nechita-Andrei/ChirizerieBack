@@ -17,8 +17,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.Objects;
 
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.METHOD_NOT_ALLOWED;
+import static org.springframework.http.HttpStatus.*;
 
 @Slf4j
 @RestControllerAdvice
@@ -29,6 +28,13 @@ public class ExceptionHandling {
 
     @Autowired
     private HttpResponseUtil httpResponseUtil;
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<HttpResponse> handleException(Exception exception) {
+        log.error(exception.getMessage());
+        return httpResponseUtil.createHttpResponse(INTERNAL_SERVER_ERROR, exception.getMessage());
+    }
+
 
     @ExceptionHandler(AlreadyExistsException.class)
     public ResponseEntity<HttpResponse> alreadyExistsException(AlreadyExistsException exception) {
