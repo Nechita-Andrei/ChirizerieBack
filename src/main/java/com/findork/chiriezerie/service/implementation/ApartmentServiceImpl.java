@@ -51,7 +51,7 @@ public class ApartmentServiceImpl implements ApartmentService {
         return apartmentRepository.findAll().stream()
                 .filter(apartment -> {
                     if (city != null)
-                        return apartment.getCity().equals(city);
+                        return apartment.getCity().toLowerCase().contains(city.toLowerCase());
                     return true;
                 })
                 .filter(apartment -> {
