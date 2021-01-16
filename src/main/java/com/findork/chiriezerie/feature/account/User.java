@@ -46,7 +46,7 @@ public class User {
     @Email
     private String email;
     
-//    @NotBlank
+    @NotBlank
     @Size(max = 10)
     private String phoneNumber;
 

@@ -1,5 +1,6 @@
-package com.findork.chiriezerie.feature.account;
+package com.findork.chiriezerie.repository;
 
+import com.findork.chiriezerie.feature.account.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

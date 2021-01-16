@@ -2,7 +2,7 @@ package com.findork.chiriezerie.security.auth;
 
 import com.findork.chiriezerie.exception.AlreadyExistsException;
 import com.findork.chiriezerie.feature.account.User;
-import com.findork.chiriezerie.feature.account.UserRepository;
+import com.findork.chiriezerie.repository.UserRepository;
 import com.findork.chiriezerie.security.constants.AuthConstants;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

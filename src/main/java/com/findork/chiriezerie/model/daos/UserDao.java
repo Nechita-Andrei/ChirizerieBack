@@ -22,6 +22,7 @@ public class UserDao {
     private String username;
     private String email;
     private String phoneNumber;
+    private String profilePicture;
     private Set<Role> roles;
     private List<ApartmentDao> apartments = new ArrayList<>();
 
@@ -32,6 +33,8 @@ public class UserDao {
         this.username = user.getUsername();
         this.phoneNumber = user.getPhoneNumber();
         this.roles = user.getRoles();
-        user.getApartment().forEach(a -> apartments.add(new ApartmentDao(a)));
+        this.profilePicture = user.getProfilePicture();
+        if (user.getApartment() != null)
+            user.getApartment().forEach(a -> apartments.add(new ApartmentDao(a)));
     }
 }

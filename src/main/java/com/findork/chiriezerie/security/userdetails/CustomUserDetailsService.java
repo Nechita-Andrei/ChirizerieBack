@@ -2,7 +2,7 @@ package com.findork.chiriezerie.security.userdetails;
 
 import com.findork.chiriezerie.feature.account.AccountStatus;
 import com.findork.chiriezerie.feature.account.User;
-import com.findork.chiriezerie.feature.account.UserRepository;
+import com.findork.chiriezerie.repository.UserRepository;
 import com.findork.chiriezerie.util.LoginAttemptService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

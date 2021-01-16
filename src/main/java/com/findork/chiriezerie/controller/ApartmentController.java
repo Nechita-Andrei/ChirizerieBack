@@ -4,7 +4,7 @@ import com.findork.chiriezerie.exception.AppException;
 import com.findork.chiriezerie.feature.account.User;
 import com.findork.chiriezerie.model.Apartment;
 import com.findork.chiriezerie.model.daos.ApartmentDao;
-import com.findork.chiriezerie.service.IApartmentService;
+import com.findork.chiriezerie.service.ApartmentService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,11 +18,21 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ApartmentController {
 
-    private final IApartmentService apartmentService;
+    private final ApartmentService apartmentService;
 
     @GetMapping("")
     public List<ApartmentDao> getAll() {
         return apartmentService.getAll().stream().map(ApartmentDao::new).collect(Collectors.toList());
+    }
+    
+    @GetMapping("/filter")
+    public List<ApartmentDao> getFilteredApartments(@RequestParam(required = false) String city,
+                                                    @RequestParam(required = false) Integer rooms,
+                                                    @RequestParam(required = false, defaultValue = "0") Integer minPrice,
+                                                    @RequestParam(required = false) Integer maxPrice,
+                                                    @RequestParam(required = false, defaultValue = "0") Integer minSquareFeet,
+                                                    @RequestParam(required = false) Integer maxSquareFeet) {
+        return apartmentService.getFilteredApartments(city, rooms, minPrice, maxPrice, minSquareFeet, maxSquareFeet);
     }
 
     @GetMapping("/{id}")

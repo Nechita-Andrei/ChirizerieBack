@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public interface IApartmentService {
+public interface ApartmentService {
 
     List<Apartment> getAll();
 
@@ -18,4 +18,5 @@ public interface IApartmentService {
 
     Apartment saveOrUpdate(ApartmentDao apartmentDao, User user);
 
+    List<ApartmentDao> getFilteredApartments(String city, Integer rooms, Integer minPrice, Integer maxPrice, Integer minSquareFeet, Integer maxSquareFeet);
 }

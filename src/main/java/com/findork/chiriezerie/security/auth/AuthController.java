@@ -41,13 +41,9 @@ public class AuthController {
     private final AuthService authService;
     private final HttpResponseUtil httpResponseUtil;
     private final CustomUserDetailsService customUserDetailsService;
-    /**
-     * Validate the credentials and generate the jwt tokens
-     *
-     * @return access token and refresh token
-     */
+    
     @PostMapping("/signin")
-    public ResponseEntity<?> signin(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> signIn(@RequestBody LoginRequest loginRequest) {
 
         var userDetails = customUserDetailsService.loadUserByUsername(loginRequest.getUsername());
 
@@ -64,11 +60,6 @@ public class AuthController {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password, authorities));
     }
 
-    /**
-     * Validate the refresh token and generate access token
-     *
-     * @return access token
-     */
     @GetMapping("/refreshToken")
     public ResponseEntity<?> refreshToken(@RequestHeader(AuthConstants.AUTH_KEY) String authRefreshToken) {
         System.out.println(authRefreshToken);
@@ -91,11 +82,6 @@ public class AuthController {
         }
     }
 
-    /**
-     * Validate the access token and returns user details
-     *
-     * @return status of token
-     */
     @GetMapping("/userDetails")
     public ResponseEntity<?> details(@RequestHeader(AuthConstants.AUTH_KEY) String authToken) {
         String jwt = requestHandler.getJwtFromStringRequest(authToken);
@@ -103,11 +89,6 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
-    /**
-     * This is for user registration
-     *
-     * @return user registration status
-     */
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
