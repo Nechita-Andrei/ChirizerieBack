@@ -12,6 +12,8 @@ public interface ApartmentService {
 
     List<Apartment> getAll();
 
+    List<ApartmentDao> getSuggestionsByApartmentId(Long apartmentId);
+
     Apartment getById(Long id);
 
     Apartment deleteById(Long id);
