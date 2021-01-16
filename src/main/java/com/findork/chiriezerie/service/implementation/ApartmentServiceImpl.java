@@ -7,18 +7,16 @@ import com.findork.chiriezerie.repository.ApartmentRepository;
 import com.findork.chiriezerie.repository.UserRepository;
 import com.findork.chiriezerie.service.ApartmentService;
 import com.google.gson.Gson;
-import io.jsonwebtoken.Header;
-import lombok.AllArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
 public class ApartmentServiceImpl implements ApartmentService {
 
     private final Gson gson;
@@ -29,13 +27,18 @@ public class ApartmentServiceImpl implements ApartmentService {
     private static final String FLUSK_URL_SUGGESTIONS = "http://localhost:5000/suggestions";
     private boolean initializedApartments = false;
 
+    public ApartmentServiceImpl(Gson gson, ApartmentRepository apartmentRepository, UserRepository userRepository) {
+        this.gson = gson;
+        this.apartmentRepository = apartmentRepository;
+        this.userRepository = userRepository;
+    }
+
     @Override
     public List<Apartment> getAll() {
         if (!initializedApartments) {
             saveApartments();
             initializedApartments = true;
         }
-
         return apartmentRepository.findAll();
     }
 
@@ -43,7 +46,7 @@ public class ApartmentServiceImpl implements ApartmentService {
     public List<ApartmentDao> getSuggestionsByApartmentId(Long apartmentId) {
         ApartmentDao currentApartment = new ApartmentDao(apartmentRepository.findById(apartmentId).get());
         HttpEntity<ApartmentDao> request = new HttpEntity<>(currentApartment);
-        ApartmentDao[] suggestions = restTemplate.postForObject(FLUSK_URL_SET, request, ApartmentDao[].class);
+        ApartmentDao[] suggestions = restTemplate.postForObject(FLUSK_URL_SUGGESTIONS, request, ApartmentDao[].class);
         return Arrays.asList(suggestions);
     }
 
@@ -51,11 +54,15 @@ public class ApartmentServiceImpl implements ApartmentService {
         List<ApartmentDao> allApartments = apartmentRepository
                 .findAll()
                 .stream()
-                .map(ApartmentDao::new)
+                .map(a -> {
+                    ApartmentDao ad = new ApartmentDao(a);
+                    ad.setPictureList(new ArrayList<>());
+                    return ad;
+                })
                 .collect(Collectors.toList());
         HttpEntity<List<ApartmentDao>> request = new HttpEntity<>(allApartments);
 
-        restTemplate.postForObject(FLUSK_URL_SUGGESTIONS, request, Void.class);
+        restTemplate.postForObject(FLUSK_URL_SET, request, Void.class);
     }
 
 
