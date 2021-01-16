@@ -5,6 +5,7 @@ import com.findork.chiriezerie.feature.account.User;
 import com.findork.chiriezerie.model.Apartment;
 import com.findork.chiriezerie.model.daos.ApartmentDao;
 import com.findork.chiriezerie.service.ApartmentService;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

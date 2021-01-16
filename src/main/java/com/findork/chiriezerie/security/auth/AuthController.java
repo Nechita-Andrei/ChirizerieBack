@@ -18,6 +18,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -32,6 +33,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 @Slf4j
 @RestController
 @RequestMapping("/api/auth")
+@ApiIgnore
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;

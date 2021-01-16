@@ -3,11 +3,13 @@ package com.findork.chiriezerie.feature.account;
 import com.findork.chiriezerie.security.payload.UserRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/admin")
+@ApiIgnore
 public class AdminController {
 
     @PostMapping
