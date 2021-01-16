@@ -17,5 +17,4 @@ public class AdminController {
     public String createPoll(@Valid @RequestBody UserRequest userRequest) {
        return "Congratulation Admin you can access this api";
     }
-
 }

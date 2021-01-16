@@ -13,8 +13,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.List;
+import java.util.Set;
 
 
 @AllArgsConstructor
@@ -27,7 +27,7 @@ import java.util.List;
         @UniqueConstraint(columnNames = {"email"})}
 )
 public class User {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -45,7 +45,7 @@ public class User {
     @Size(max = 40)
     @Email
     private String email;
-    
+
     @NotBlank
     @Size(max = 10)
     private String phoneNumber;
@@ -53,13 +53,9 @@ public class User {
     @NotBlank
     @Size(max = 100)
     private String password;
-    
+
     @Column(name = "profile_picture")
     private String profilePicture;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "account_status")
-    private AccountStatus accountStatus = AccountStatus.ACTIVE;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
@@ -69,16 +65,4 @@ public class User {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Apartment> apartment;
-    
-    public boolean isActive() {
-        return accountStatus.isActive();
-    }
-
-    public boolean isBanned() {
-        return accountStatus.isBanned();
-    }
-
-    public boolean isLocked() {
-        return accountStatus.isLocked();
-    }
 }

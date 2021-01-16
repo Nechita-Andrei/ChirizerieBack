@@ -32,9 +32,9 @@ public class ChiriezerieConfiguration {
     }
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().
-                title("Chiriezerie").
-                description("Blanao")
+        return new ApiInfoBuilder()
+                .title("Chiriezerie")
+                .description("Blanao")
                 .build();
     }
 }

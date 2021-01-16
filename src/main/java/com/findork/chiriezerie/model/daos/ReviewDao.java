@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Timestamp;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -15,6 +17,7 @@ public class ReviewDao {
     private Long apartmentId;
     private String reviewText;
     private Integer rating;
+    private Timestamp date;
 
     public ReviewDao(Review review) {
         this.userId = review.getUser().getId();
@@ -22,5 +25,6 @@ public class ReviewDao {
         this.apartmentId = review.getApartment().getId();
         this.reviewText = review.getReviewText();
         this.rating = review.getRating();
+        this.date = review.getDate();
     }
 }
