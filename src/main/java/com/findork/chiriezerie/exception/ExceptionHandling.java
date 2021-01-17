@@ -29,13 +29,6 @@ public class ExceptionHandling {
     @Autowired
     private HttpResponseUtil httpResponseUtil;
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<HttpResponse> handleException(Exception exception) {
-        log.error(exception.getMessage());
-        return httpResponseUtil.createHttpResponse(INTERNAL_SERVER_ERROR, exception.getMessage());
-    }
-
-
     @ExceptionHandler(AlreadyExistsException.class)
     public ResponseEntity<HttpResponse> alreadyExistsException(AlreadyExistsException exception) {
         log.error(exception.getMessage());

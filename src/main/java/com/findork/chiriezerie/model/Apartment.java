@@ -5,6 +5,7 @@ import com.findork.chiriezerie.model.daos.ApartmentDao;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "apartment")
+@ToString
 public class Apartment {
 
     @Id
