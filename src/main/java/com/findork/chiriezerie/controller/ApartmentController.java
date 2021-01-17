@@ -53,6 +53,13 @@ public class ApartmentController {
         return new ApartmentDao(apartment);
     }
 
+    @GetMapping("/suggestions/{id}")
+    public List<ApartmentDao> getSuggestions(@PathVariable Long id) {
+        log.info("Getting suggestions for apartment with apartmentId={}", id);
+        return apartmentService.getSuggestionsByApartmentId(id);
+    }
+
+
     @DeleteMapping("/{id}")
     public ApartmentDao delete(@PathVariable Long id) {
         log.info("Deleting apartment by apartmentId={}", id);
