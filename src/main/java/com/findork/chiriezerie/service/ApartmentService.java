@@ -18,5 +18,5 @@ public interface ApartmentService {
 
     Apartment saveOrUpdate(ApartmentDao apartmentDao, User user);
 
-    List<ApartmentDao> getFilteredApartments(String city, Integer rooms, Integer minPrice, Integer maxPrice, Integer minSquareFeet, Integer maxSquareFeet);
+    List<ApartmentDao> getFilteredApartments(String city, Integer rooms, Integer minPrice, Integer maxPrice, Integer minSquareFeet, Integer maxSquareFeet, User user);
 }

@@ -22,10 +22,13 @@ public class ApartmentController {
 
     private final ApartmentService apartmentService;
 
-    @GetMapping("")
-    public List<ApartmentDao> getAll() {
+    @GetMapping
+    public List<ApartmentDao> getAll(User user) {
         log.info("Getting all apartments");
-        return apartmentService.getAll().stream().map(ApartmentDao::new).collect(Collectors.toList());
+        return apartmentService.getAll().stream()
+                .filter(a -> !a.getUser().getId().equals(user.getId()))
+                .map(ApartmentDao::new)
+                .collect(Collectors.toList());
     }
     
     @GetMapping("/filter")
@@ -34,9 +37,10 @@ public class ApartmentController {
                                                     @RequestParam(required = false, defaultValue = "0") Integer minPrice,
                                                     @RequestParam(required = false) Integer maxPrice,
                                                     @RequestParam(required = false, defaultValue = "0") Integer minSquareFeet,
-                                                    @RequestParam(required = false) Integer maxSquareFeet) {
+                                                    @RequestParam(required = false) Integer maxSquareFeet,
+                                                    User user) {
         log.info("Getting filtered apartments");
-        return apartmentService.getFilteredApartments(city, rooms, minPrice, maxPrice, minSquareFeet, maxSquareFeet);
+        return apartmentService.getFilteredApartments(city, rooms, minPrice, maxPrice, minSquareFeet, maxSquareFeet, user);
     }
 
     @GetMapping("/{id}")

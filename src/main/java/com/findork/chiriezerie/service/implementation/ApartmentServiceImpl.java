@@ -47,7 +47,7 @@ public class ApartmentServiceImpl implements ApartmentService {
     }
 
     @Override
-    public List<ApartmentDao> getFilteredApartments(String city, Integer rooms, Integer minPrice, Integer maxPrice, Integer minSquareFeet, Integer maxSquareFeet) {
+    public List<ApartmentDao> getFilteredApartments(String city, Integer rooms, Integer minPrice, Integer maxPrice, Integer minSquareFeet, Integer maxSquareFeet, User user) {
         return apartmentRepository.findAll().stream()
                 .filter(apartment -> {
                     if (city != null)
@@ -78,6 +78,7 @@ public class ApartmentServiceImpl implements ApartmentService {
                     }
                     return minSquareFeet <= apartment.getSquareFeet() && apartment.getSquareFeet() <= maxSquareFeet;
                 })
+                .filter(apartment -> !apartment.getUser().getId().equals(user.getId()))
                 .map(ApartmentDao::new)
                 .collect(Collectors.toList());
     }
